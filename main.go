@@ -18,7 +18,8 @@ type Person struct {
 }
 
 var (
-	d = flag.String("d", `{ "id": 1234, "name": "John Doe", "email": "jdoe@example.com" }`, "json string")
+	d        = flag.String("d", `{ "id": 1234, "name": "John Doe", "email": "jdoe@example.com" }`, "json string")
+	fileName = flag.String("f", "book.bin", "file name")
 )
 
 func main() {
@@ -46,8 +47,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("Failed to encode address book:", err)
 	}
-	fname := "book.bin"
-	if err := ioutil.WriteFile(fname, out, 0644); err != nil {
+	if err := ioutil.WriteFile(*fileName, out, 0644); err != nil {
 		log.Fatalln("Failed to write address book:", err)
 	}
 }
