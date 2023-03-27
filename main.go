@@ -1,6 +1,9 @@
 package main
 
 import (
+	"encoding/json"
+	"flag"
+	"fmt"
 	"io/ioutil"
 	"j2p/pb"
 	"log"
@@ -8,11 +11,28 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+type Person struct {
+	Id    int32  `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+var (
+	d = flag.String("d", `{ "id": 1234, "name": "John Doe", "email": "jdoe@example.com" }`, "json string")
+)
+
 func main() {
+	flag.Parse()
+
+	var person Person
+	if err := json.Unmarshal([]byte(*d), &person); err != nil {
+		fmt.Printf("Failed to unmarshal json string: %v", err)
+	}
+
 	p := pb.Person{
-		Id:    1234,
-		Name:  "John Doe",
-		Email: "jdoe@example.com",
+		Id:    person.Id,
+		Name:  person.Name,
+		Email: person.Email,
 		Phones: []*pb.Person_PhoneNumber{
 			{Number: "555-4321", Type: pb.Person_HOME},
 		},

@@ -12,6 +12,8 @@ $ protoc ./proto/*.proto --go_out=./pbgo
 $ go build
 
 $ ./j2p
+
+$ ./j2p -d '{ "id": 1, "name": "xxx", "email": "mail@example.com" }'
 ```
 
 ## References
