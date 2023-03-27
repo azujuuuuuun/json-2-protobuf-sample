@@ -18,7 +18,7 @@ type Person struct {
 }
 
 var (
-	d        = flag.String("d", `{ "id": 1234, "name": "John Doe", "email": "jdoe@example.com" }`, "json string")
+	data     = flag.String("d", `{ "id": 1234, "name": "John Doe", "email": "jdoe@example.com" }`, "json string")
 	fileName = flag.String("f", "book.bin", "file name")
 )
 
@@ -26,7 +26,7 @@ func main() {
 	flag.Parse()
 
 	var person Person
-	if err := json.Unmarshal([]byte(*d), &person); err != nil {
+	if err := json.Unmarshal([]byte(*data), &person); err != nil {
 		fmt.Printf("Failed to unmarshal json string: %v", err)
 	}
 
