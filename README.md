@@ -1,5 +1,7 @@
 # json-2-protobuf-sample
 
+Sample CLI to convert JSON string to Protocol Buffers binary.
+
 ## Get Started
 
 ```
